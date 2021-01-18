@@ -7,9 +7,10 @@ export function NotificationCard() {
   if (canAddMovieToNomineeList()) return null;
   return (
     <Center
+      p={8}
       flexDir="column"
       width="100%"
-      h="100px"
+      h={{ xs: '160px', md: '100px' }}
       bg="rgba(255, 10, 100, 0.2)"
       mb={8}
     >

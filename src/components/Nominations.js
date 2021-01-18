@@ -28,7 +28,8 @@ function Nomination({ title, year, poster, imdbID }) {
         colorScheme="red"
         variant="outline"
         size="sm"
-        ml={2}
+        ml={[0, 0, 0, 2]}
+        width={['100%', '100%', '78px']}
         onClick={onClickHandler}
       >
         Remove
@@ -39,7 +40,7 @@ function Nomination({ title, year, poster, imdbID }) {
 
 Nomination.propTypes = {
   title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  year: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   imdbID: PropTypes.string.isRequired,
 };

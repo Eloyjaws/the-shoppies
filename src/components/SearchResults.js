@@ -45,7 +45,8 @@ function SearchResult({ title, year, poster, imdbID }) {
         variant="outline"
         cursor={canNotBeNominated ? 'not-allowed' : 'pointer'}
         size="sm"
-        ml={2}
+        ml={[0, 0, 0, 2]}
+        width={['100%', '100%', '78px']}
         onClick={onClickHandler}
         isDisabled={canNotBeNominated}
       >
