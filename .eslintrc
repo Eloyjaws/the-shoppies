@@ -3,7 +3,7 @@
         "wesbos"
     ],
     "rules": {
-        "prettier/prettier": 1,
+        "prettier/prettier": 0,
         "react/jsx-props-no-spreading": 0
     }
 }
