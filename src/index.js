@@ -1,14 +1,35 @@
-import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { persistWithLocalStorage } from 'react-query/persist-localstorage-experimental';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from './components/ThemeProvider';
 import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './helpers/reportWebVitals';
+import App from './App';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+      staleTime: 1000 * 60 * 60 * 24, // 24 hours
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+    },
+  },
+});
+
+persistWithLocalStorage(queryClient);
 
 ReactDOM.render(
   <StrictMode>
-    <ColorModeScript />
-    <App />
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <App />
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>,
   document.getElementById('root')
 );

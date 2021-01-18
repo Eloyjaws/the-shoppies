@@ -1,41 +1,44 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+
+import { Heading, Grid, Container, SimpleGrid } from '@chakra-ui/react';
+import { ColorModeSwitcher } from './components/ColorModeSwitcher';
+import { SearchBar } from './components/SearchBar';
+import { SearchResults } from './components/SearchResults';
+import { Nominations } from './components/Nominations';
+import { NotificationCard } from './components/NotificationCard';
+import { useDebounce } from './helpers/useDebounce';
+import { fetchMovieList } from './Api';
+
+import { Provider } from './components/AppContext';
 
 function App() {
+  const [movieTitle, updateMovieTitle] = useState('');
+  const debouncedMovieTitle = useDebounce(movieTitle, 500);
+
+  // info States: { isLoading, isError, data, error }
+  const info = useQuery([debouncedMovieTitle], () => {
+    if (debouncedMovieTitle === '') return;
+    return fetchMovieList(debouncedMovieTitle);
+  });
+
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <Provider>
+      <Grid p={3}>
+        <ColorModeSwitcher justifySelf="flex-end" />
+        <Container maxW="6xl" centerContent>
+          <Heading alignSelf="flex-start" mb={8}>
+            The Shoppies
+          </Heading>
+          <SearchBar {...{ info, updateMovieTitle }} />
+          <NotificationCard />
+          <SimpleGrid width="100%" columns={{ sm: 1, md: 2 }} spacing={6}>
+            <SearchResults {...{ info, movieTitle }} />
+            <Nominations />
+          </SimpleGrid>
+        </Container>
+      </Grid>
+    </Provider>
   );
 }
 
