@@ -12,7 +12,6 @@ export function Card({ children }) {
 }
 
 Card.propTypes = {
-  title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
