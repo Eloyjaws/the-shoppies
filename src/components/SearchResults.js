@@ -9,6 +9,7 @@ import {
   Text,
   Link,
   Spinner,
+  Center,
 } from '@chakra-ui/react';
 import { CircleIcon } from '../helpers/icons';
 import { Card } from './Card';
@@ -76,8 +77,12 @@ export function SearchResults({ info, movieTitle }) {
   if (info.isLoading) {
     return (
       <Card>
-        <Text>Loading</Text>
-        <Spinner />
+        <Heading as="h4" size="lg" mb={4}>
+          Loading results for {`"${movieTitle || ''}"`}...
+        </Heading>
+        <Center height="60%">
+          <Spinner size="xl" />
+        </Center>
       </Card>
     );
   }

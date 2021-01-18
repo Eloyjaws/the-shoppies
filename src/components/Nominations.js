@@ -38,8 +38,8 @@ function Nomination({ title, year, poster, imdbID }) {
 }
 
 Nomination.propTypes = {
-  title: PropTypes.string,
-  year: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
   imdbID: PropTypes.string.isRequired,
 };

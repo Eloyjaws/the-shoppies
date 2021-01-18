@@ -3,6 +3,7 @@
         "wesbos"
     ],
     "rules": {
+        // Turn to 0 or prettier warnings will be misclassified as failures during CI
         "prettier/prettier": 0,
         "react/jsx-props-no-spreading": 0
     }

@@ -17,7 +17,7 @@ function App() {
   const debouncedMovieTitle = useDebounce(movieTitle, 500);
 
   // info States: { isLoading, isError, data, error }
-  const info = useQuery([debouncedMovieTitle], () => {
+  const info = useQuery(['movie', debouncedMovieTitle], () => {
     if (debouncedMovieTitle === '') return;
     return fetchMovieList(debouncedMovieTitle);
   });
@@ -30,7 +30,7 @@ function App() {
           <Heading alignSelf="flex-start" mb={8}>
             The Shoppies
           </Heading>
-          <SearchBar {...{ info, updateMovieTitle }} />
+          <SearchBar {...{ isLoading: info.isLoading, updateMovieTitle }} />
           <NotificationCard />
           <SimpleGrid width="100%" columns={{ sm: 1, md: 2 }} spacing={6}>
             <SearchResults {...{ info, movieTitle }} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Input,
   InputGroup,
   InputLeftElement,
@@ -13,7 +12,7 @@ import PropTypes from 'prop-types';
 import { SearchIcon } from '../helpers/icons';
 import { Card } from './Card';
 
-export function SearchBar({ info, movieTitle, updateMovieTitle }) {
+export function SearchBar({ isLoading, movieTitle, updateMovieTitle }) {
   return (
     <Card>
       <FormControl id="email">
@@ -29,7 +28,7 @@ export function SearchBar({ info, movieTitle, updateMovieTitle }) {
             placeholder="Start typing movie title to fetch results..."
           />
           <InputRightElement>
-            {info.isLoading ? (
+            {isLoading ? (
               <Spinner size="sm" label="Fetching movies from OMDB" />
             ) : null}
           </InputRightElement>
@@ -40,7 +39,7 @@ export function SearchBar({ info, movieTitle, updateMovieTitle }) {
 }
 
 SearchBar.propTypes = {
-  info: PropTypes.object,
+  isLoading: PropTypes.bool,
   movieTitle: PropTypes.string,
   updateMovieTitle: PropTypes.func.isRequired,
 };

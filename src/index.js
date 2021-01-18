@@ -8,16 +8,17 @@ import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './helpers/reportWebVitals';
 import App from './App';
 
+// Tried to implement a cache. Ran out of time
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
-      staleTime: 1000 * 60 * 60 * 24, // 24 hours
-      refetchIntervalInBackground: false,
-      refetchOnWindowFocus: false,
-      keepPreviousData: true,
-    },
-  },
+  // defaultOptions: {
+  //   queries: {
+  //     cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  //     staleTime: 1000 * 60 * 60 * 24, // 24 hours
+  //     refetchIntervalInBackground: false,
+  //     refetchOnWindowFocus: false,
+  //     keepPreviousData: true,
+  //   },
+  // },
 });
 
 persistWithLocalStorage(queryClient);
